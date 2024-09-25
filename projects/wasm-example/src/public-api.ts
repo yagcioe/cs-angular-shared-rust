@@ -1,3 +1,3 @@
-export * from './lib/example-rust-lib/pkg';
-import init from './lib/example-rust-lib/pkg';
+export * from './lib';
+import init from './lib';
 export default init;

@@ -32,7 +32,7 @@
               },
               {
                 "glob": "**/*.wasm",
-                "input": "projects/wasm-example/src/lib/example-rust-lib/pkg"
+                "input": "projects/wasm-example/src/lib/"
               }
             ],
             "styles": [
@@ -95,7 +95,7 @@
               },
               {
                 "glob": "**/*.wasm",
-                "input": "projects/wasm-example/src/lib/pkg"
+                "input": "projects/wasm-example/src/lib"
               }
             ],
             "styles": [

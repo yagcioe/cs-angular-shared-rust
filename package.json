@@ -7,8 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:rust":"wasm-pack build --target web -d ../projects/wasm-example/src/lib/example-rust-lib/pkg" ,
-    "build:dev":"cargo watch -i .gitignore -i \"pkg/*\" -s \"wasm-pack build  --target web -d ../projects/wasm-example/src/lib/example-rust-lib/pkg\" -C ./example-rust-lib/" 
+    "build:rust":"wasm-pack build ./example-rust-lib --target web -d ../projects/wasm-example/src/lib/" ,
+    "serve:rust":"cargo watch -c -i .gitignore -i \"pkg/*\" -s \"npm run build:rust\" -C ./example-rust-lib" 
   },
   "private": true,
   "dependencies": {
