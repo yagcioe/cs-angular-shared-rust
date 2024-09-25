@@ -8,8 +8,18 @@ pub fn factorial(num: u128) -> u128 {
     }
 }
 
+#[wasm_bindgen]
+extern "C" {
+    fn alert(s: &str);
+}
 
 #[wasm_bindgen]
+pub fn greet() {
+    alert("Hello, shared!");
+}
+
+
+#[wasm_bindgen] 
 pub fn get_factorial(num: u8) -> String {
     let mut f: u128 = 0;
     for _ in 0..10000000 {

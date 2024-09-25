@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, type OnInit, signal } from '@angular/core';
-import { get_factorial, initExampleRust } from 'wasm-example';
+import init, { get_factorial, greet } from 'wasm-example';
 
 @Component({
   selector: 'app-root',
@@ -9,18 +9,15 @@ import { get_factorial, initExampleRust } from 'wasm-example';
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   jsResult = signal<string>('');
   rsResult = signal<string>('');
   jsTime = signal<string>('');
   rsTime = signal<string>('');
   calculating = signal<boolean>(false);
 
-  ngOnInit() {
-    initExampleRust();
-  }
-
   calculate(inp: number | string) {
+    greet();
     this.calculating.set(true);
 
     setTimeout(() => {
