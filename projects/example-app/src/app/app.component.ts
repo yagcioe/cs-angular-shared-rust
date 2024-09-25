@@ -1,15 +1,18 @@
-import { ChangeDetectionStrategy, Component, type OnInit, signal } from '@angular/core';
-import init, { get_factorial, greet } from 'wasm-example';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { add_one, get_factorial } from 'wasm-example';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
+  addResult = signal<number>(0);
+
   jsResult = signal<string>('');
   rsResult = signal<string>('');
   jsTime = signal<string>('');
@@ -17,7 +20,6 @@ export class AppComponent {
   calculating = signal<boolean>(false);
 
   calculate(inp: number | string) {
-    greet();
     this.calculating.set(true);
 
     setTimeout(() => {
@@ -37,8 +39,13 @@ export class AppComponent {
       this.calculating.set(false);
     }, 50);
   }
-}
 
+  protected add(value: string) {
+    const n = typeof value === 'number' ? value : parseInt(value, 10);
+    this.addResult.set(add_one(n))
+  }
+
+}
 
 function factorial(x: number): number {
   if (x === 0) {
