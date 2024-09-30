@@ -10,13 +10,9 @@
 
 
   <ItemGroup>
-    <None Include="../../example-rust-lib/target/debug/my_dotnet_lib.dll" Condition="Exists('../../example-rust-lib/target/debug/my_dotnet_lib.dll')">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="../../example-rust-lib/target/debug/my_dotnet_lib.pdb" Condition="Exists('../../example-rust-lib/target/debug/my_dotnet_lib.pdb')">
+    <None Include="../../example-rust-lib/target/debug/my_dotnet_lib.dll" Condition="Exists('../../example-rust-lib/target/debug/my_dotnet_lib.dll')" Link="my_dotnet_lib.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
 
 </Project>
