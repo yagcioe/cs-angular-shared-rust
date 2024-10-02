@@ -1,4 +1,4 @@
-pub fn factorial(num: u128) -> u128 {
+pub fn factorial(num: i64) -> i64 {
     match num {
         0 => 1,
         1 => 1,

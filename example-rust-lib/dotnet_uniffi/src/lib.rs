@@ -37,6 +37,16 @@ pub fn test_str(mut num: String) -> String {
 }
 
 #[uniffi::export]
-pub fn test_panic(mut num: String) -> String {
+pub fn test_panic() {
     panic!("lol")
+}
+
+#[uniffi::export]
+pub fn factorial(num: i64) -> i64 {
+    core::factorial(num)
+}
+
+#[uniffi::export]
+pub fn last(num: Vec<i64>) -> i64 {
+    *(num.last().unwrap())
 }

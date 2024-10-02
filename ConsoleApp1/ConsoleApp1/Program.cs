@@ -1,10 +1,14 @@
-Console.WriteLine(uniffi.dotnet_uniffi.DotnetUniffiMethods.Test(12));
-Console.WriteLine(uniffi.dotnet_uniffi.DotnetUniffiMethods.TestStr("hello"));
+using uniffi.dotnet_uniffi;
+
+Console.WriteLine(DotnetUniffiMethods.Test(12));
+Console.WriteLine(DotnetUniffiMethods.TestStr("hello"));
 try
 {
-
-Console.WriteLine(uniffi.dotnet_uniffi.DotnetUniffiMethods.TestPanic("hello"));
-}catch(uniffi.dotnet_uniffi.PanicException ex)
+  DotnetUniffiMethods.TestPanic();
+}catch(PanicException ex)
 {
   Console.Error.WriteLine(ex.Message);
 }
+
+Console.WriteLine(DotnetUniffiMethods.Factorial(10));
+Console.WriteLine(DotnetUniffiMethods.Last(new List<long>() { 12,13,14}));

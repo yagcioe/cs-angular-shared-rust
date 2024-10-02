@@ -24,9 +24,3 @@ dependencies = ["release"]
 dependencies = ["release", "csbinding"]
 
 [tasks.watch]
-install_crate = { crate_name = "cargo-watch", binary = "cargo", test_arg = [
-    "watch",
-    "--help",
-] }
-command = "cargo"
-args = ["watch", "-c", "-s", 'cargo make build-all', "-w", "./src"]

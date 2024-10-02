@@ -1,0 +1,18 @@
+[tasks.build-all]
+
+[tasks.watch]
+install_crate = { crate_name = "cargo-watch", binary = "cargo", test_arg = [
+    "watch",
+    "--help",
+] }
+command = "cargo"
+args = [
+    "watch",
+    "-s",
+    'cargo make build-all',
+    "-w",
+    "./wasm",
+    "-w",
+    "./dotnet_uniffi",
+]
+workspace = false

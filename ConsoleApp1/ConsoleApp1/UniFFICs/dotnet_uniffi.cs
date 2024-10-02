@@ -433,6 +433,14 @@ static class _UniFFILib {
     );
 
     [DllImport("dotnet_uniffi")]
+    public static extern long uniffi_dotnet_uniffi_fn_func_factorial(long @num,ref RustCallStatus _uniffi_out_err
+    );
+
+    [DllImport("dotnet_uniffi")]
+    public static extern long uniffi_dotnet_uniffi_fn_func_last(RustBuffer @num,ref RustCallStatus _uniffi_out_err
+    );
+
+    [DllImport("dotnet_uniffi")]
     public static extern int uniffi_dotnet_uniffi_fn_func_mul(int @a,int @b,ref RustCallStatus _uniffi_out_err
     );
 
@@ -445,7 +453,7 @@ static class _UniFFILib {
     );
 
     [DllImport("dotnet_uniffi")]
-    public static extern RustBuffer uniffi_dotnet_uniffi_fn_func_test_panic(RustBuffer @num,ref RustCallStatus _uniffi_out_err
+    public static extern void uniffi_dotnet_uniffi_fn_func_test_panic(ref RustCallStatus _uniffi_out_err
     );
 
     [DllImport("dotnet_uniffi")]
@@ -685,6 +693,14 @@ static class _UniFFILib {
     );
 
     [DllImport("dotnet_uniffi")]
+    public static extern ushort uniffi_dotnet_uniffi_checksum_func_factorial(
+    );
+
+    [DllImport("dotnet_uniffi")]
+    public static extern ushort uniffi_dotnet_uniffi_checksum_func_last(
+    );
+
+    [DllImport("dotnet_uniffi")]
     public static extern ushort uniffi_dotnet_uniffi_checksum_func_mul(
     );
 
@@ -725,6 +741,18 @@ static class _UniFFILib {
             }
         }
         {
+            var checksum = _UniFFILib.uniffi_dotnet_uniffi_checksum_func_factorial();
+            if (checksum != 13353) {
+                throw new UniffiContractChecksumException($"uniffi.dotnet_uniffi: uniffi bindings expected function `uniffi_dotnet_uniffi_checksum_func_factorial` checksum `13353`, library returned `{checksum}`");
+            }
+        }
+        {
+            var checksum = _UniFFILib.uniffi_dotnet_uniffi_checksum_func_last();
+            if (checksum != 19403) {
+                throw new UniffiContractChecksumException($"uniffi.dotnet_uniffi: uniffi bindings expected function `uniffi_dotnet_uniffi_checksum_func_last` checksum `19403`, library returned `{checksum}`");
+            }
+        }
+        {
             var checksum = _UniFFILib.uniffi_dotnet_uniffi_checksum_func_mul();
             if (checksum != 1705) {
                 throw new UniffiContractChecksumException($"uniffi.dotnet_uniffi: uniffi bindings expected function `uniffi_dotnet_uniffi_checksum_func_mul` checksum `1705`, library returned `{checksum}`");
@@ -744,8 +772,8 @@ static class _UniFFILib {
         }
         {
             var checksum = _UniFFILib.uniffi_dotnet_uniffi_checksum_func_test_panic();
-            if (checksum != 19210) {
-                throw new UniffiContractChecksumException($"uniffi.dotnet_uniffi: uniffi bindings expected function `uniffi_dotnet_uniffi_checksum_func_test_panic` checksum `19210`, library returned `{checksum}`");
+            if (checksum != 52521) {
+                throw new UniffiContractChecksumException($"uniffi.dotnet_uniffi: uniffi bindings expected function `uniffi_dotnet_uniffi_checksum_func_test_panic` checksum `52521`, library returned `{checksum}`");
             }
         }
         {
@@ -918,12 +946,65 @@ class FfiConverterTypeComputationResult: FfiConverterRustBuffer<ComputationResul
             FfiConverterDuration.INSTANCE.Write(value.@computationTime, stream);
     }
 }
+
+
+
+
+class FfiConverterSequenceInt64: FfiConverterRustBuffer<List<long>> {
+    public static FfiConverterSequenceInt64 INSTANCE = new FfiConverterSequenceInt64();
+
+    public override List<long> Read(BigEndianStream stream) {
+        var length = stream.ReadInt();
+        var result = new List<long>(length);
+        for (int i = 0; i < length; i++) {
+            result.Add(FfiConverterInt64.INSTANCE.Read(stream));
+        }
+        return result;
+    }
+
+    public override int AllocationSize(List<long> value) {
+        var sizeForLength = 4;
+
+        // details/1-empty-list-as-default-method-parameter.md
+        if (value == null) {
+            return sizeForLength;
+        }
+
+        var sizeForItems = value.Select(item => FfiConverterInt64.INSTANCE.AllocationSize(item)).Sum();
+        return sizeForLength + sizeForItems;
+    }
+
+    public override void Write(List<long> value, BigEndianStream stream) {
+        // details/1-empty-list-as-default-method-parameter.md
+        if (value == null) {
+            stream.WriteInt(0);
+            return;
+        }
+
+        stream.WriteInt(value.Count);
+        value.ForEach(item => FfiConverterInt64.INSTANCE.Write(item, stream));
+    }
+}
 #pragma warning restore 8625
 internal static class DotnetUniffiMethods {
     public static int Add(int @a, int @b) {
         return FfiConverterInt32.INSTANCE.Lift(
     _UniffiHelpers.RustCall( (ref RustCallStatus _status) =>
     _UniFFILib.uniffi_dotnet_uniffi_fn_func_add(FfiConverterInt32.INSTANCE.Lower(@a), FfiConverterInt32.INSTANCE.Lower(@b), ref _status)
+));
+    }
+
+    public static long Factorial(long @num) {
+        return FfiConverterInt64.INSTANCE.Lift(
+    _UniffiHelpers.RustCall( (ref RustCallStatus _status) =>
+    _UniFFILib.uniffi_dotnet_uniffi_fn_func_factorial(FfiConverterInt64.INSTANCE.Lower(@num), ref _status)
+));
+    }
+
+    public static long Last(List<long> @num) {
+        return FfiConverterInt64.INSTANCE.Lift(
+    _UniffiHelpers.RustCall( (ref RustCallStatus _status) =>
+    _UniFFILib.uniffi_dotnet_uniffi_fn_func_last(FfiConverterSequenceInt64.INSTANCE.Lower(@num), ref _status)
 ));
     }
 
@@ -948,11 +1029,11 @@ internal static class DotnetUniffiMethods {
 ));
     }
 
-    public static String TestPanic(String @num) {
-        return FfiConverterString.INSTANCE.Lift(
+    public static void TestPanic() {
+        
     _UniffiHelpers.RustCall( (ref RustCallStatus _status) =>
-    _UniFFILib.uniffi_dotnet_uniffi_fn_func_test_panic(FfiConverterString.INSTANCE.Lower(@num), ref _status)
-));
+    _UniFFILib.uniffi_dotnet_uniffi_fn_func_test_panic( ref _status)
+);
     }
 
     public static String TestStr(String @num) {

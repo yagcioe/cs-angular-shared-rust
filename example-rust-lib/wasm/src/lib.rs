@@ -16,10 +16,10 @@ pub fn whatddup() {
 }
 
 #[wasm_bindgen]
-pub fn get_factorial(num: u8) -> String {
-    let mut f: u128 = 0;
+pub fn get_factorial(num: i64) -> String {
+    let mut f: i64 = 0;
     for _ in 0..10000000 {
-        f = core::factorial(num as u128);
+        f = core::factorial(num);
     }
     f.to_string()
 }
