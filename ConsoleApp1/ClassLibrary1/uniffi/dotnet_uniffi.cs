@@ -172,38 +172,38 @@ struct RustCallStatus {
 }
 
 // Base class for all uniffi exceptions
-internal class UniffiException: Exception {
+public class UniffiException: Exception {
     public UniffiException(): base() {}
     public UniffiException(string message): base(message) {}
 }
 
-internal class UndeclaredErrorException: UniffiException {
+public class UndeclaredErrorException: UniffiException {
     public UndeclaredErrorException(string message): base(message) {}
 }
 
-internal class PanicException: UniffiException {
+public class PanicException: UniffiException {
     public PanicException(string message): base(message) {}
 }
 
-internal class AllocationException: UniffiException {
+public class AllocationException: UniffiException {
     public AllocationException(string message): base(message) {}
 }
 
-internal class InternalException: UniffiException {
+public class InternalException: UniffiException {
     public InternalException(string message): base(message) {}
 }
 
-internal class InvalidEnumException: InternalException {
+public class InvalidEnumException: InternalException {
     public InvalidEnumException(string message): base(message) {
     }
 }
 
-internal class UniffiContractVersionException: UniffiException {
+public class UniffiContractVersionException: UniffiException {
     public UniffiContractVersionException(string message): base(message) {
     }
 }
 
-internal class UniffiContractChecksumException: UniffiException {
+public class UniffiContractChecksumException: UniffiException {
     public UniffiContractChecksumException(string message): base(message) {
     }
 }
@@ -959,7 +959,7 @@ class FfiConverterDuration: FfiConverterRustBuffer<TimeSpan> {
 
 
 
-internal record ComputationResult (
+public record ComputationResult (
     long @value, 
     TimeSpan @computationTime
 ) {
@@ -1026,7 +1026,7 @@ class FfiConverterSequenceInt64: FfiConverterRustBuffer<List<long>> {
     }
 }
 #pragma warning restore 8625
-internal static class DotnetUniffiMethods {
+public static class DotnetUniffiMethods {
     public static int Add(int @a, int @b) {
         return FfiConverterInt32.INSTANCE.Lift(
     _UniffiHelpers.RustCall( (ref RustCallStatus _status) =>

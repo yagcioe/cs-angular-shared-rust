@@ -1,8 +1,12 @@
-[tasks.release]
+[tasks.prod]
 command = "cargo"
 args = ["build", "--release"]
 
-[tasks.csbinding]
+[tasks.dev]
+command = "cargo"
+args = ["build"]
+
+[tasks.csbinding-prod]
 install_crate = { crate_name = "uniffi-bindgen-cs", binary = "uniffi-bindgen-cs", test_arg = "--help" }
 install_crate_args = [
     "--git",
@@ -15,12 +19,31 @@ args = [
     "--library",
     "../target/release/dotnet_uniffi.dll",
     "--out-dir",
-    "../../ConsoleApp1/ConsoleApp1/UniFFICs",
+    "../../ConsoleApp1/ClassLibrary1/uniffi",
     "--no-format",
 ]
-dependencies = ["release"]
+dependencies = ["prod"]
 
-[tasks.build-all]
-dependencies = ["release", "csbinding"]
+[tasks.csbinding-dev]
+install_crate = { crate_name = "uniffi-bindgen-cs", binary = "uniffi-bindgen-cs", test_arg = "--help" }
+install_crate_args = [
+    "--git",
+    "https://github.com/NordSecurity/uniffi-bindgen-cs",
+    "--tag",
+    "v0.8.3+v0.25.0",
+]
+command = "uniffi-bindgen-cs"
+args = [
+    "--library",
+    "../target/debug/dotnet_uniffi.dll",
+    "--out-dir",
+    "../../ConsoleApp1/ClassLibrary1/uniffi",
+    "--no-format",
+]
+dependencies = ["prod"]
 
-[tasks.watch]
+[tasks.prod-all]
+dependencies = ["prod", "csbinding-prod"]
+
+[tasks.dev-all]
+dependencies = ["dev", "csbinding-dev"]

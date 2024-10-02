@@ -1,4 +1,5 @@
-[tasks.build-all]
+[tasks.prod-all]
+[tasks.dev-all]
 
 [tasks.watch]
 install_crate = { crate_name = "cargo-watch", binary = "cargo", test_arg = [
@@ -10,7 +11,7 @@ args = [
     "watch",
     "-c",
     "-s",
-    'cargo make build-all',
+    'cargo make dev-all',
     "-w",
     "./wasm",
     "-w",

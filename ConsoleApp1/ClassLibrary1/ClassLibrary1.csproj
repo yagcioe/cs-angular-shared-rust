@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>10.0</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Platforms>x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IsExternalInit" Version="1.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../example-rust-lib/target/release/dotnet_uniffi.dll" Condition="'$(Configuration)' != 'Debug' and Exists('../../example-rust-lib/target/release/dotnet_uniffi.dll')" Link="dotnet_uniffi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="../../example-rust-lib/target/debug/dotnet_uniffi.dll" Condition="'$(Configuration)' == 'Debug' and Exists('../../example-rust-lib/target/debug/dotnet_uniffi.dll')" Link="dotnet_uniffi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="../../example-rust-lib/target/debug/dotnet_uniffi.pdb" Condition="'$(Configuration)' == 'Debug' and Exists('../../example-rust-lib/target/debug/dotnet_uniffi.pdb')" Link="dotnet_uniffi.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

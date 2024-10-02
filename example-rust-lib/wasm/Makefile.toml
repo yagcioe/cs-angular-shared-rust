@@ -1,4 +1,4 @@
-[tasks.build-wasm]
+[tasks.build-wasm-prod]
 install_crate = { crate_name = "wasm-pack", binary = "wasm-pack", test_arg = "--help" }
 command = "wasm-pack"
 args = [
@@ -11,7 +11,20 @@ args = [
     "../../projects/wasm-example/src/lib/",
 ]
 
-[tasks.build-all]
-dependencies = ["build-wasm"]
+[tasks.build-wasm-dev]
+install_crate = { crate_name = "wasm-pack", binary = "wasm-pack", test_arg = "--help" }
+command = "wasm-pack"
+args = [
+    "build",
+    ".",
+    "--target",
+    "web",
+    "-d",
+    "../../projects/wasm-example/src/lib/",
+]
 
-[tasks.watch]
+[tasks.prod-all]
+dependencies = ["build-wasm-prod"]
+
+[tasks.dev-all]
+dependencies = ["build-wasm-dev"]

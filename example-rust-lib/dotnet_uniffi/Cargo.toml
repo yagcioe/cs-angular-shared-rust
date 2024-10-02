@@ -17,3 +17,6 @@ cargo-watch = "*"
 
 [lib]
 crate-type = ["cdylib"]
+
+[bindings.csharp]
+access_modifier = "public"

@@ -6,13 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
 
   <ItemGroup>
-    <None Include="../../example-rust-lib/target/release/dotnet_uniffi.dll" Condition="Exists('../../example-rust-lib/target/release/dotnet_uniffi.dll')" Link="dotnet_uniffi.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj" />
   </ItemGroup>
 
 </Project>
