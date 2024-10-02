@@ -10,6 +10,20 @@ pub struct ComputationResult {
     pub computation_time: Duration,
 }
 
+impl ComputationResult {
+    pub fn new(value: i64) -> Self {
+        Self {
+            value,
+            computation_time: Duration::from_millis(1000),
+        }
+    }
+}
+
+#[derive(Copy, Clone, Debug, PartialEq, uniffi::Record)]
+pub struct ComputationRequest {
+    pub value: i64,
+}
+
 #[uniffi::export]
 pub fn add(a: i32, b: i32) -> i32 {
     a + b
@@ -54,4 +68,15 @@ pub fn last(num: Vec<i64>) -> i64 {
 #[uniffi::export]
 pub fn valid(value: String) -> bool {
     core::validate(value)
+}
+
+#[uniffi::export]
+pub fn compute(value: ComputationRequest) -> ComputationResult {
+    ComputationResult::new(value.value)
+}
+
+#[uniffi::export]
+pub fn compute_all(value: Vec<ComputationRequest>) -> Vec<ComputationResult> {
+    let result = value.iter().map(|value|{ComputationResult::new(value.value)}).collect();
+    result
 }
