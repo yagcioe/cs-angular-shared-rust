@@ -16,4 +16,4 @@ uniffi = { version = "0.25.0", features = ["build"] }
 cargo-watch = "*"
 
 [lib]
-crate-type = ["cdylib", "staticlib", "lib"]
+crate-type = ["cdylib"]
