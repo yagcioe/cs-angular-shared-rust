@@ -28,3 +28,8 @@ pub fn get_factorial(num: i64) -> String {
 pub fn add_one(num: i32) -> i32 {
     core::add_one(num)
 }
+
+#[wasm_bindgen]
+pub fn valid(value: String) -> bool {
+    core::validate(value)
+}

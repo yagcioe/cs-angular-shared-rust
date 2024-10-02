@@ -17,3 +17,13 @@
 <button type="button" (click)="add(inp2.value)">
   add 1
 </button>
+
+<input placeholder="Input a text" #inp3 />
+
+<button type="button" (click)="validate(inp3.value)">
+  validate
+</button>
+
+@if(valid() !== null){
+valid: {{valid()}}
+}

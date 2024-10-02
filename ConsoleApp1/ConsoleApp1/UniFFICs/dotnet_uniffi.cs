@@ -461,6 +461,10 @@ static class _UniFFILib {
     );
 
     [DllImport("dotnet_uniffi")]
+    public static extern sbyte uniffi_dotnet_uniffi_fn_func_valid(RustBuffer @value,ref RustCallStatus _uniffi_out_err
+    );
+
+    [DllImport("dotnet_uniffi")]
     public static extern RustBuffer ffi_dotnet_uniffi_rustbuffer_alloc(int @size,ref RustCallStatus _uniffi_out_err
     );
 
@@ -721,6 +725,10 @@ static class _UniFFILib {
     );
 
     [DllImport("dotnet_uniffi")]
+    public static extern ushort uniffi_dotnet_uniffi_checksum_func_valid(
+    );
+
+    [DllImport("dotnet_uniffi")]
     public static extern uint ffi_dotnet_uniffi_uniffi_contract_version(
     );
 
@@ -782,6 +790,12 @@ static class _UniFFILib {
                 throw new UniffiContractChecksumException($"uniffi.dotnet_uniffi: uniffi bindings expected function `uniffi_dotnet_uniffi_checksum_func_test_str` checksum `2099`, library returned `{checksum}`");
             }
         }
+        {
+            var checksum = _UniFFILib.uniffi_dotnet_uniffi_checksum_func_valid();
+            if (checksum != 18431) {
+                throw new UniffiContractChecksumException($"uniffi.dotnet_uniffi: uniffi bindings expected function `uniffi_dotnet_uniffi_checksum_func_valid` checksum `18431`, library returned `{checksum}`");
+            }
+        }
     }
 }
 
@@ -839,6 +853,32 @@ class FfiConverterInt64: FfiConverter<long, long> {
 
     public override void Write(long value, BigEndianStream stream) {
         stream.WriteLong(value);
+    }
+}
+
+
+
+class FfiConverterBoolean: FfiConverter<bool, sbyte> {
+    public static FfiConverterBoolean INSTANCE = new FfiConverterBoolean();
+
+    public override bool Lift(sbyte value) {
+        return value != 0;
+    }
+
+    public override bool Read(BigEndianStream stream) {
+        return Lift(stream.ReadSByte());
+    }
+
+    public override sbyte Lower(bool value) {
+        return value ? (sbyte)1 : (sbyte)0;
+    }
+
+    public override int AllocationSize(bool value) {
+        return (sbyte)1;
+    }
+
+    public override void Write(bool value, BigEndianStream stream) {
+        stream.WriteSByte(Lower(value));
     }
 }
 
@@ -1040,6 +1080,13 @@ internal static class DotnetUniffiMethods {
         return FfiConverterString.INSTANCE.Lift(
     _UniffiHelpers.RustCall( (ref RustCallStatus _status) =>
     _UniFFILib.uniffi_dotnet_uniffi_fn_func_test_str(FfiConverterString.INSTANCE.Lower(@num), ref _status)
+));
+    }
+
+    public static bool Valid(String @value) {
+        return FfiConverterBoolean.INSTANCE.Lift(
+    _UniffiHelpers.RustCall( (ref RustCallStatus _status) =>
+    _UniFFILib.uniffi_dotnet_uniffi_fn_func_valid(FfiConverterString.INSTANCE.Lower(@value), ref _status)
 ));
     }
 

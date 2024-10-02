@@ -50,3 +50,8 @@ pub fn factorial(num: i64) -> i64 {
 pub fn last(num: Vec<i64>) -> i64 {
     *(num.last().unwrap())
 }
+
+#[uniffi::export]
+pub fn valid(value: String) -> bool {
+    core::validate(value)
+}

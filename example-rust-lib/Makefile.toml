@@ -8,6 +8,7 @@ install_crate = { crate_name = "cargo-watch", binary = "cargo", test_arg = [
 command = "cargo"
 args = [
     "watch",
+    "-c",
     "-s",
     'cargo make build-all',
     "-w",

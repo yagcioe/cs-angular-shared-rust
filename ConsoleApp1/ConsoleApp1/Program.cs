@@ -1,14 +1,8 @@
 using uniffi.dotnet_uniffi;
 
-Console.WriteLine(DotnetUniffiMethods.Test(12));
-Console.WriteLine(DotnetUniffiMethods.TestStr("hello"));
-try
+while (true)
 {
-  DotnetUniffiMethods.TestPanic();
-}catch(PanicException ex)
-{
-  Console.Error.WriteLine(ex.Message);
+  Console.WriteLine("Enter string to validate...");
+  var str = Console.ReadLine()??"";
+  Console.WriteLine($"valid: {DotnetUniffiMethods.Valid(str)}");
 }
-
-Console.WriteLine(DotnetUniffiMethods.Factorial(10));
-Console.WriteLine(DotnetUniffiMethods.Last(new List<long>() { 12,13,14}));
