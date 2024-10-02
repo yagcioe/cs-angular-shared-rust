@@ -1,0 +1,19 @@
+[package]
+name = "dotnet_uniffi"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+uniffi = { version = "0.25.0" }
+core = {path = "../core"}
+
+
+[build-dependencies]
+uniffi = { version = "0.25.0", features = ["build"] }
+
+[dev-dependencies]
+cargo-watch = "*"
+
+[lib]
+crate-type = ["cdylib", "staticlib", "lib"]

@@ -1,0 +1,32 @@
+[tasks.release]
+command = "cargo"
+args = ["build", "--release"]
+
+[tasks.csbinding]
+install_crate = { crate_name = "uniffi-bindgen-cs", binary = "uniffi-bindgen-cs", test_arg = "--help" }
+install_crate_args = [
+    "--git",
+    "https://github.com/NordSecurity/uniffi-bindgen-cs",
+    "--tag",
+    "v0.8.3+v0.25.0",
+]
+command = "uniffi-bindgen-cs"
+args = [
+    "--library",
+    "../target/release/dotnet_uniffi.dll",
+    "--out-dir",
+    "../../ConsoleApp1/ConsoleApp1/UniFFICs",
+    "--no-format",
+]
+dependencies = ["release"]
+
+[tasks.build-all]
+dependencies = ["release", "csbinding"]
+
+[tasks.watch]
+install_crate = { crate_name = "cargo-watch", binary = "cargo", test_arg = [
+    "watch",
+    "--help",
+] }
+command = "cargo"
+args = ["watch", "-c", "-s", 'cargo make build-all', "-w", "./src"]
