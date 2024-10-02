@@ -529,16 +529,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "csbindgen"
-version = "1.9.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c26b9831049b947d154bba920e4124053def72447be6fb106a96f483874b482a"
-dependencies = [
- "regex",
- "syn 2.0.77",
-]
-
-[[package]]
 name = "darling"
 version = "0.12.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1217,14 +1207,6 @@ dependencies = [
  "net2",
  "winapi 0.2.8",
  "ws2_32-sys",
-]
-
-[[package]]
-name = "my_dotnet_lib"
-version = "0.1.0"
-dependencies = [
- "core",
- "csbindgen",
 ]
 
 [[package]]

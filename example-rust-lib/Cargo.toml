@@ -1,5 +1,5 @@
 [workspace]
-members = ["wasm", "core", "dotnet", "dotnet_uniffi"]
+members = ["wasm", "core", "dotnet_uniffi"]
 resolver = "2"
 
 [profile.release]
