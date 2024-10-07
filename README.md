@@ -1,1 +1,0 @@
-Code example for article [Powering Angular with Rust (Wasm)](https://medium.com/@eugeniyoz/powering-angular-with-rust-wasm-0eed1668a51c)

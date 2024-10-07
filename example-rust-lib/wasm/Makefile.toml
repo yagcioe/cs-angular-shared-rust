@@ -8,7 +8,7 @@ args = [
     "--target",
     "web",
     "-d",
-    "../../projects/wasm-example/src/lib/",
+    "../../web/projects/wasm-example/src/lib/",
 ]
 
 [tasks.build-wasm-dev]
@@ -20,7 +20,7 @@ args = [
     "--target",
     "web",
     "-d",
-    "../../projects/wasm-example/src/lib/",
+    "../../web/projects/wasm-example/src/lib/",
 ]
 
 [tasks.prod-all]
