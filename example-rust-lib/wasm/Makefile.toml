@@ -20,7 +20,7 @@ args = [
     "--target",
     "web",
     "-d",
-    "../../web/projects/wasm-example/src/lib/",
+    "../../web2/wasm-example/",
 ]
 
 [tasks.prod-all]
