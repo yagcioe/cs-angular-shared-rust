@@ -32,7 +32,7 @@
               },
               {
                 "glob": "**/*.wasm",
-                "input": "wasm-example"
+                "input": "projects/example-app/src/wasm-example"
               }
             ],
             "styles": [
@@ -95,7 +95,7 @@
               },
               {
                 "glob": "**/*.wasm",
-                "input": "wasm-example"
+                "input": "projects/example-app/src/wasm-example"
               }
             ],
             "styles": [
