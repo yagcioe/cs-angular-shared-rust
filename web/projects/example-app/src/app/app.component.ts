@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { add_one, get_factorial, valid } from 'wasm-example';
+import init, { add_one, get_factorial, valid } from '../wasm-example';
+
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent {
   rsTime = signal<string>('');
   calculating = signal<boolean>(false);
   valid = signal<boolean | null>(null);
+  initalized = signal<boolean>(false);
 
   calculate(inp: number | string) {
     this.calculating.set(true);
@@ -56,6 +58,11 @@ export class AppComponent {
     } else {
       return x * this.factorial(x - 1);
     }
+  }
+
+  initWasm() {
+    // alternative: init with APP_INITALIZER
+    init().then(() => this.initalized.set(true))
   }
 }
 

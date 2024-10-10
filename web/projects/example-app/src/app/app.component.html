@@ -1,3 +1,9 @@
+<button type="button" (click)="initWasm()">
+  Initalize
+</button>
+<p>Initalized: {{initalized()}}</p>
+
+
 <input max="22" min="1" type="number" placeholder="Input a number" #inp />
 
 <button type="button" (click)="calculate(inp.value)" [disabled]="calculating()">

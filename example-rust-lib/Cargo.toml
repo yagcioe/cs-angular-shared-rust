@@ -1,7 +1,8 @@
 [workspace]
-members = ["wasm", "core", "dotnet_uniffi"]
+members = ["wasm", "core", "dotnet_uniffi", "sanityCheck"]
 resolver = "2"
 
 [profile.release]
 lto = true
-#opt-level = 's'
+# numeric overflows should panic
+overflow-checks = true

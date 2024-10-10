@@ -8,6 +8,7 @@ namespace ConsoleApp2
   {
     static void Main(string[] args)
     {
+      Console.WriteLine(DotnetUniffiMethods.GetFactorial(22));
       while (true)
       {
         Console.WriteLine("Enter string to validate...");

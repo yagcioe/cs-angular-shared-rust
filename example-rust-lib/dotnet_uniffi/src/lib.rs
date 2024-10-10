@@ -80,3 +80,12 @@ pub fn compute_all(value: Vec<ComputationRequest>) -> Vec<ComputationResult> {
     let result = value.iter().map(|value|{ComputationResult::new(value.value)}).collect();
     result
 }
+
+#[uniffi::export]
+pub fn get_factorial(num: i64) -> String {
+    let mut f: i64 = 0;
+    for _ in 0..10000000 {
+        f = core::factorial(num);
+    }
+    f.to_string()
+}

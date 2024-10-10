@@ -8,7 +8,7 @@ args = [
     "--target",
     "web",
     "-d",
-    "../../web/projects/wasm-example/src/lib/",
+    "../../web/projects/example-app/src/wasm-example/",
 ]
 
 [tasks.build-wasm-dev]
@@ -17,10 +17,11 @@ command = "wasm-pack"
 args = [
     "build",
     ".",
+    "--dev",
     "--target",
     "web",
     "-d",
-    "../../web2/projects/example-app/src/wasm-example/",
+    "../../web/projects/example-app/src/wasm-example/",
 ]
 
 [tasks.prod-all]

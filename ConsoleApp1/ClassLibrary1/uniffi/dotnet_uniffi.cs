@@ -445,6 +445,10 @@ static class _UniFFILib {
     );
 
     [DllImport("dotnet_uniffi")]
+    public static extern RustBuffer uniffi_dotnet_uniffi_fn_func_get_factorial(long @num,ref RustCallStatus _uniffi_out_err
+    );
+
+    [DllImport("dotnet_uniffi")]
     public static extern long uniffi_dotnet_uniffi_fn_func_last(RustBuffer @num,ref RustCallStatus _uniffi_out_err
     );
 
@@ -717,6 +721,10 @@ static class _UniFFILib {
     );
 
     [DllImport("dotnet_uniffi")]
+    public static extern ushort uniffi_dotnet_uniffi_checksum_func_get_factorial(
+    );
+
+    [DllImport("dotnet_uniffi")]
     public static extern ushort uniffi_dotnet_uniffi_checksum_func_last(
     );
 
@@ -780,6 +788,12 @@ static class _UniFFILib {
             var checksum = _UniFFILib.uniffi_dotnet_uniffi_checksum_func_factorial();
             if (checksum != 13353) {
                 throw new UniffiContractChecksumException($"uniffi.dotnet_uniffi: uniffi bindings expected function `uniffi_dotnet_uniffi_checksum_func_factorial` checksum `13353`, library returned `{checksum}`");
+            }
+        }
+        {
+            var checksum = _UniFFILib.uniffi_dotnet_uniffi_checksum_func_get_factorial();
+            if (checksum != 26933) {
+                throw new UniffiContractChecksumException($"uniffi.dotnet_uniffi: uniffi bindings expected function `uniffi_dotnet_uniffi_checksum_func_get_factorial` checksum `26933`, library returned `{checksum}`");
             }
         }
         {
@@ -1184,6 +1198,13 @@ public static class DotnetUniffiMethods {
         return FfiConverterInt64.INSTANCE.Lift(
     _UniffiHelpers.RustCall( (ref RustCallStatus _status) =>
     _UniFFILib.uniffi_dotnet_uniffi_fn_func_factorial(FfiConverterInt64.INSTANCE.Lower(@num), ref _status)
+));
+    }
+
+    public static String GetFactorial(long @num) {
+        return FfiConverterString.INSTANCE.Lift(
+    _UniffiHelpers.RustCall( (ref RustCallStatus _status) =>
+    _UniFFILib.uniffi_dotnet_uniffi_fn_func_get_factorial(FfiConverterInt64.INSTANCE.Lower(@num), ref _status)
 ));
     }
 

@@ -4,7 +4,7 @@ args = ["build", "--release"]
 
 [tasks.dev]
 command = "cargo"
-args = ["build"]
+args = ["build --dev", "--profile release"]
 
 [tasks.csbinding-prod]
 install_crate = { crate_name = "uniffi-bindgen-cs", binary = "uniffi-bindgen-cs", test_arg = "--help" }
